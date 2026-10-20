@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "HW_049_maruf.2052302.schema.json",
+  "title": "Commute record",
+  "description": "One row of HW_049_maruf.2052302.csv: a single student's trip on a single day.",
+  "type": "object",
+  "properties": {
+    "student_id": {
+      "type": "string",
+      "pattern": "^S[0-9]+$",
+      "description": "Student identifier (S1 to S4 in the current data)."
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "Trip date, ISO 8601 (YYYY-MM-DD). Currently 2026-10-05 to 2026-10-30, weekdays only."
+    },
+    "mode": {
+      "type": "string",
+      "enum": ["Car", "Public transport", "Walk", "Bicycle"],
+      "description": "Transport mode used for the trip."
+    },
+    "distance_km": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "description": "Trip distance in kilometres."
+    },
+    "duration_min": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Trip duration in minutes."
+    },
+    "cost_eur": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Trip cost in euros. 0 for Walk and Bicycle."
+    },
+    "arrival_margin_min": {
+      "type": "integer",
+      "description": "Minutes between arrival and the deadline. Positive = early, negative = late."
+    }
+  },
+  "required": [
+    "student_id",
+    "date",
+    "mode",
+    "distance_km",
+    "duration_min",
+    "cost_eur",
+    "arrival_margin_min"
+  ],
+  "additionalProperties": false
+}
